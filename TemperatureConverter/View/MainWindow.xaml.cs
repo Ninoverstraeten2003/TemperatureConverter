@@ -27,14 +27,14 @@ namespace View
 
         private void ConvertToCelcius(object sender, RoutedEventArgs e)
         {
-            var degreesFahrenheit = double.Parse(textBox.Text);
+            var degreesFahrenheit = double.Parse(textBoxFahrenheit.Text);
             textBoxCelcius.Text = Math.Round(((degreesFahrenheit - 32) * 5 / 9),2).ToString();
 
         }
 
         private void ConvertToFahrenheit(object sender, RoutedEventArgs e)
         {
-            var degreesCelsius = double.Parse(textBox.Text);
+            var degreesCelsius = double.Parse(textBoxCelcius.Text);
             textBoxFahrenheit.Text = Math.Round(((degreesCelsius * 9 / 5) + 32),2).ToString();
         }
     }

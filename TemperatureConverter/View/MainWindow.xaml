@@ -1,17 +1,35 @@
-﻿<Window x:Class="View.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:View"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <StackPanel Margin="-6,0,6,0">
-        <TextBox x:Name="textBox"/>
-        <Button Content="Convert to Celcius" Click="ConvertToCelcius"/>
-        <Button Content="Convert to Fahrenheit" Click="ConvertToFahrenheit"/>
-        <TextBox x:Name="textBoxCelcius"/>
-        <TextBox x:Name="textBoxFahrenheit"/>
+﻿<Window
+    x:Class="View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="525"
+    Height="350"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="labelStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="Gray" />
+                        <GradientStop Offset="1" Color="White" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock Style="{StaticResource labelStyle}" Text="Celsius" />
+        <TextBox x:Name="textBoxCelcius" />
+        <TextBlock Padding="2" Style="{StaticResource labelStyle}" />
+        <TextBox x:Name="textBoxFahrenheit" />
+        <Button Click="ConvertToCelcius" Content="Convert to Celcius" />
+        <Button Click="ConvertToFahrenheit" Content="Convert to Fahrenheit" />
     </StackPanel>
-
 </Window>
