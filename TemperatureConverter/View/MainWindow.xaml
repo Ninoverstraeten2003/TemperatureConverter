@@ -33,10 +33,6 @@
     </Window.Resources>
     <StackPanel>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -49,19 +45,8 @@
                 x:Name="textBoxCelsius"
                 Grid.Row="1"
                 Style="{StaticResource textBoxStyle}" />
-            <Button
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Click="ConvertCelsius"
-                Content="Convert"
-                Style="{StaticResource buttonStyle}" />
         </Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -75,19 +60,8 @@
                 x:Name="textBoxFahrenheit"
                 Grid.Row="1"
                 Style="{StaticResource textBoxStyle}" />
-            <Button
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Click="ConvertFahrenHeit"
-                Content="Convert"
-                Style="{StaticResource buttonStyle}" />
         </Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -101,13 +75,12 @@
                 x:Name="textBoxKelvin"
                 Grid.Row="1"
                 Style="{StaticResource textBoxStyle}" />
-            <Button
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Click="ConvertKelvin"
-                Content="Convert"
-                Style="{StaticResource buttonStyle}" />
         </Grid>
+        <Slider
+            x:Name="slider"
+            Maximum="1000"
+            Minimum="0"
+            ValueChanged="SliderValueChanged" />
+
     </StackPanel>
 </Window>

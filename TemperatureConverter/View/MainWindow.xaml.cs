@@ -24,27 +24,12 @@ namespace View
         {
             InitializeComponent();
         }
-
-        private void ConvertCelsius(object sender, RoutedEventArgs e)
+        private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var degreesCelsius = double.Parse(textBoxCelsius.Text);
-            textBoxFahrenheit.Text = Math.Round((degreesCelsius * 9 / 5) + 32, 2).ToString();
-            textBoxKelvin.Text = Math.Round(degreesCelsius + 273.15 , 2).ToString();
-        }
-
-        private void ConvertFahrenHeit(object sender, RoutedEventArgs e)
-        {
-            var degreesFahrenheit = double.Parse(textBoxFahrenheit.Text);
-            textBoxCelsius.Text = Math.Round((degreesFahrenheit - 32) * 5 / 9, 2).ToString();
-            textBoxKelvin.Text = Math.Round(((degreesFahrenheit - 32) * 5 / 9) + 273.15, 2).ToString();
-        }
-
-        private void ConvertKelvin(object sender, RoutedEventArgs e)
-        {
-            var degreesKelvin = double.Parse(textBoxKelvin.Text);
+            var degreesKelvin = slider.Value;
+            textBoxKelvin.Text = degreesKelvin.ToString();
             textBoxCelsius.Text = Math.Round(degreesKelvin - 273.15).ToString();
-            textBoxFahrenheit.Text = Math.Round((degreesKelvin - 273.15) * 9 / 5 + 32, 2).ToString();    
-
+            textBoxFahrenheit.Text = Math.Round((degreesKelvin - 273.15) * 9 / 5 + 32, 2).ToString();
         }
     }
     
