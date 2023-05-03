@@ -24,5 +24,11 @@ namespace View
         {
             InitializeComponent();
         }
+
+        private void ConvertToCelcius(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this, "You clicked the button", "Clicked!");
+            textBox.Text = "You clicked the button";
+        }
     }
 }
