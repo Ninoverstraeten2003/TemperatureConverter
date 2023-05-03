@@ -27,7 +27,6 @@ namespace View
         private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var degreesKelvin = slider.Value;
-            textBoxKelvin.Text = degreesKelvin.ToString();
             textBoxCelsius.Text = Math.Round(degreesKelvin - 273.15).ToString();
             textBoxFahrenheit.Text = Math.Round((degreesKelvin - 273.15) * 9 / 5 + 32, 2).ToString();
         }

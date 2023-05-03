@@ -72,9 +72,9 @@
                 Style="{StaticResource labelStyle}"
                 Text="Kelvin" />
             <TextBox
-                x:Name="textBoxKelvin"
                 Grid.Row="1"
-                Style="{StaticResource textBoxStyle}" />
+                Style="{StaticResource textBoxStyle}"
+                Text="{Binding ElementName=slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <Slider
             x:Name="slider"
