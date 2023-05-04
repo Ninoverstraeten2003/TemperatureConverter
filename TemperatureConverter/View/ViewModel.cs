@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace View
 {
-    internal class ConverterViewModel
+    public class ConverterViewModel: INotifyPropertyChanged
     {
         public ConverterViewModel() { }
         private double temperatureInKelvin;
