@@ -31,6 +31,7 @@
             <Setter Property="FontSize" Value="16" />
         </Style>
         <local:CelsiusConverter x:Key="celsiusConverter" />
+        <local:FahrenheitConverter x:Key="fahrenheitConverter" />
     </Window.Resources>
     <StackPanel>
         <Grid>
@@ -67,7 +68,8 @@
             <TextBox
                 x:Name="textBoxFahrenheit"
                 Grid.Row="1"
-                Style="{StaticResource textBoxStyle}" />
+                Style="{StaticResource textBoxStyle}"
+                Text="{Binding ElementName=slider, Path=Value, Converter={StaticResource fahrenheitConverter}, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -90,8 +92,6 @@
         <Slider
             x:Name="slider"
             Maximum="1000"
-            Minimum="0"
-            ValueChanged="SliderValueChanged" />
-
+            Minimum="0" />
     </StackPanel>
 </Window>
