@@ -27,43 +27,72 @@ namespace View
         }
         
     }
-
-    public class CelsiusConverter : IValueConverter
+    public interface ITemperatureScale
     {
+        string Name { get; }
+        double ConvertToKelvin(double temperature);
+        double ConvertFromKelvin(double temperature);
+    }
+    public class TemperatureConverter : IValueConverter
+    {
+        public ITemperatureScale TemperatureScale { get; set; }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var kelvin = (double)value;
-            var celsius = kelvin - 273.15;
 
-            return celsius.ToString();
+            return this.TemperatureScale.ConvertFromKelvin(kelvin).ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var celsius = double.Parse((string)value);
-            var kelvin = celsius + 273.15;
+            var temperature = double.Parse((string)value);
 
-            return kelvin;
+            return this.TemperatureScale.ConvertToKelvin(temperature);
         }
     }
-    public class FahrenheitConverter : IValueConverter
+    public class KelvinTemperatureScale : ITemperatureScale
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var kelvin = (double)value;
-            var celsius = kelvin - 273.15;
-            var fahrenheit = celsius * 1.8 + 32;
+        public string Name => "Kelvin";
 
-            return fahrenheit.ToString();
+        public double ConvertFromKelvin(double temperature)
+        {
+            return temperature;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public double ConvertToKelvin(double temperature)
         {
-            var fahrenheit = double.Parse((string)value);
-            var celsius = (fahrenheit - 32) / 1.8;
-            var kelvin = celsius + 273.15;
+            return temperature;
+        }
+    }
 
-            return kelvin;
+    public class CelsiusTemperatureScale : ITemperatureScale
+    {
+        public string Name => "Celsius";
+
+        public double ConvertFromKelvin(double temperature)
+        {
+            return temperature - 273.15;
+        }
+
+        public double ConvertToKelvin(double temperature)
+        {
+            return temperature + 273.15;
+        }
+    }
+
+    public class FahrenheitTemperatureScale : ITemperatureScale
+    {
+        public string Name => "Fahrenheit";
+
+        public double ConvertFromKelvin(double temperature)
+        {
+            return temperature * 1.8 - 459.67; ;
+        }
+
+        public double ConvertToKelvin(double temperature)
+        {
+            return (temperature + 459.67) / 1.8;
         }
     }
 }
