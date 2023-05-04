@@ -60,6 +60,6 @@
             x:Name="slider"
             Maximum="1000"
             Minimum="0"
-            Value="{Binding Path=TemperatureInKelvin}" />
+            Value="{Binding Path=TemperatureInKelvin.Value}" />
     </StackPanel>
 </Window>
