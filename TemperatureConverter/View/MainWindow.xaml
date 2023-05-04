@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="mainWindow"
     Title="MainWindow"
     Width="525"
     Height="350"
@@ -58,7 +59,7 @@
                 x:Name="celsiusTextBox"
                 Grid.Row="1"
                 Style="{StaticResource textBoxStyle}"
-                Text="{Binding ElementName=slider, Path=Value, Converter={StaticResource celsiusConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding ElementName=mainWindow, Path=TemperatureInKelvin, Converter={StaticResource celsiusConverter}, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -77,7 +78,7 @@
                 x:Name="textBoxFahrenheit"
                 Grid.Row="1"
                 Style="{StaticResource textBoxStyle}"
-                Text="{Binding ElementName=slider, Path=Value, Converter={StaticResource fahrenheitConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding ElementName=mainWindow, Path=TemperatureInKelvin, Converter={StaticResource fahrenheitConverter}, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -100,6 +101,7 @@
         <Slider
             x:Name="slider"
             Maximum="1000"
-            Minimum="0" />
+            Minimum="0"
+            Value="{Binding ElementName=mainWindow, Path=TemperatureInKelvin}" />
     </StackPanel>
 </Window>
