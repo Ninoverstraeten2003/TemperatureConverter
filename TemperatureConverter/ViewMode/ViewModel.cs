@@ -81,7 +81,9 @@ namespace ViewModel
 
         public bool CanExecute(object parameter)
         {
-            return _cell.Value >= this._minimum && _cell.Value <= this._maximum;
+            var newValue = _cell.Value + _delta;
+            return this._minimum <= newValue && newValue <= this._maximum;
+           
         }
 
         public void Execute(object parameter)
