@@ -51,32 +51,37 @@ namespace ViewModel
             this.parent = parent;
             this.temperatureScale = temperatureScale;
             this.Temperature = this.parent.TemperatureInKelvin.Derive(kelvin => temperatureScale.ConvertFromKelvin(kelvin), celsius => temperatureScale.ConvertToKelvin(celsius));
-            this.Add = new AddCommand(this.Temperature);
+            this.Increment = new AddCommand(this.Temperature, 1);
+            this.Decrement = new AddCommand(this.Temperature, -1);
         }
         public string Name => temperatureScale.Name;
         public Cell<double> Temperature { get; }
-        public ICommand Add { get; }
+        public ICommand Increment { get; }
+        public ICommand Decrement { get; }
     }
 
     public class AddCommand : ICommand
     {
         private readonly Cell<double> _cell;
-        public int delta { get; }
+        private int _delta;
 
-        public AddCommand(Cell<double> cell)
+        public AddCommand(Cell<double> cell, int delta)
         {
             this._cell = cell;
+            this._delta = delta;
+            CanExecuteChanged += () => CanExecute();
         }
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _cell.Value > -1 || _cell.Value < 1001;
         }
 
         public void Execute(object parameter)
         {
-            _cell.Value = Math.Round(_cell.Value + 1);
+            _cell.Value = Math.Round(_cell.Value + _delta);
+            CanExecuteChanged.Invoke(this, new CanExecuteChangedEventArgs(nameof(CanExecute)));
         }
     }
 }
