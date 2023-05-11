@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Cell;
 using Model;
 
@@ -49,11 +50,33 @@ namespace ViewModel
         {
             this.parent = parent;
             this.temperatureScale = temperatureScale;
-            this.Temperature = this.parent.TemperatureInKelvin.Derive(kelvin => temperatureScale.ConvertFromKelvin(kelvin));        
+            this.Temperature = this.parent.TemperatureInKelvin.Derive(kelvin => temperatureScale.ConvertFromKelvin(kelvin), celsius => temperatureScale.ConvertToKelvin(celsius));
+            this.Add = new AddCommand(this.Temperature);
+        }
+        public string Name => temperatureScale.Name;
+        public Cell<double> Temperature { get; }
+        public ICommand Add { get; }
+    }
+
+    public class AddCommand : ICommand
+    {
+        private readonly Cell<double> _cell;
+        public int delta { get; }
+
+        public AddCommand(Cell<double> cell)
+        {
+            this._cell = cell;
+        }
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
         }
 
-        public string Name => temperatureScale.Name;
-
-        public Cell<double> Temperature { get; }
+        public void Execute(object parameter)
+        {
+            _cell.Value = Math.Round(_cell.Value + 1);
+        }
     }
 }

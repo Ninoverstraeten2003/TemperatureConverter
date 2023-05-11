@@ -30,9 +30,9 @@ namespace Cell
             }
         }
 
-        public Cell<U> Derive<U>(Func<T, U> transformer)
+        public Cell<U> Derive<U>(Func<T, U> transformer, Func<U,T> untransformer)
         {
-            return new Derived<T,U>(this,transformer);
+            return new Derived<T,U>(this,transformer,untransformer);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,11 +42,12 @@ namespace Cell
     {
         private readonly Cell<IN> dependency;
         private readonly Func<IN,OUT> transformer;
-        public Derived(Cell<IN> dependency, Func<IN, OUT> transformer)
+        private readonly Func<OUT,IN> untransformer;
+        public Derived(Cell<IN> dependency, Func<IN, OUT> transformer, Func <OUT,IN> untransformer): base(transformer(dependency.Value))
         {
             this.dependency = dependency;
             this.transformer = transformer;
-
+            this.untransformer = untransformer;
             this.dependency.PropertyChanged += (sender, args) => base.Value = transformer(dependency.Value);
         }
         public override OUT Value
@@ -57,7 +58,7 @@ namespace Cell
             }
             set
             {
-                // TODO
+                this.dependency.Value = untransformer(value);
             }
         }
     }

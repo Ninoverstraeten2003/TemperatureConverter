@@ -48,10 +48,19 @@
                             Grid.Row="0"
                             Style="{StaticResource labelStyle}"
                             Text="{Binding Name}" />
-                        <TextBox
-                            Grid.Row="1"
-                            Style="{StaticResource textBoxStyle}"
-                            Text="{Binding Path=Temperature.Value, UpdateSourceTrigger=PropertyChanged}" />
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Button Command="{Binding Decrease}" Content="-" Grid.Column="0" Width="32" Height="32" />
+                            <TextBox
+                                Grid.Column="1"
+                                Style="{StaticResource textBoxStyle}"
+                                Text="{Binding Path=Temperature.Value, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Command="{Binding Increment}" Content="+" Grid.Column="2" Width="32" Height="32" />
+                        </Grid>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
