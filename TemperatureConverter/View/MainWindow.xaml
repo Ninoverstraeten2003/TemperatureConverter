@@ -54,12 +54,12 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Command="{Binding Decrement}" IsEnabled="{Binding Decrement.CanExecute}" Content="-" Grid.Column="0" Width="32" Height="32" />
+                            <Button Command="{Binding Decrement}" Content="-" Grid.Column="0" Width="32" Height="32" />
                             <TextBox
                                 Grid.Column="1"
                                 Style="{StaticResource textBoxStyle}"
                                 Text="{Binding Path=Temperature.Value, UpdateSourceTrigger=PropertyChanged}" />
-                            <Button Command="{Binding Increment}" IsEnabled="{Binding Increment.CanExecute}" Content="+" Grid.Column="2" Width="32" Height="32" />
+                            <Button Command="{Binding Increment}" Content="+" Grid.Column="2" Width="32" Height="32" />
                         </Grid>
                     </Grid>
                 </DataTemplate>
